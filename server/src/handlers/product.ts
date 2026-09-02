@@ -48,9 +48,9 @@ export const updateProduct = async (req: Request, res: Response) => {
     });
   }
 
-  // Actualizar 
-  await product.update(req.body)
-  await product.save()
+  // Actualizar
+  await product.update(req.body);
+  await product.save();
 
   res.json({ data: product });
 };
@@ -65,8 +65,22 @@ export const updateAvailability = async (req: Request, res: Response) => {
     });
   }
 
-  // Actualizar 
-  product.availability = !product.dataValues.availability
-  await product.save()
+  // Actualizar
+  product.availability = !product.dataValues.availability;
+  await product.save();
   res.json({ data: product });
+};
+
+export const deleteProduct = async (req: Request, res: Response) => {
+  const id = Number(req.params.id);
+  const product = await Product.findByPk(id);
+
+  if (!product) {
+    return res.status(400).json({
+      error: 'Producto No Encontrado',
+    });
+  }
+
+  await product.destroy();
+  res.json({ data: 'Producto Eliminado' });
 };
