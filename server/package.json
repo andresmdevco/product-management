@@ -6,11 +6,18 @@
   "author": "Andrés Muñoz @andresmdevco",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --exec tsx src/index.ts"
+    "dev": "nodemon --exec tsx src/index.ts",
+    "test": "jest"
   },
   "devDependencies": {
+    "@swc/core": "^1.16.1",
+    "@swc/jest": "^0.2.39",
     "@types/express": "^5.0.6",
+    "@types/jest": "^30.0.0",
+    "@types/supertest": "^7.2.1",
+    "jest": "^30.5.1",
     "nodemon": "^3.1.14",
+    "supertest": "^7.2.2",
     "tsx": "^4.23.12",
     "typescript": "^7.0.2"
   },
