@@ -1,4 +1,5 @@
 import swaggerJSDoc from 'swagger-jsdoc';
+import { SwaggerUiOptions } from 'swagger-ui-express';
 
 const options: swaggerJSDoc.Options = {
   swaggerDefinition: {
@@ -19,4 +20,20 @@ const options: swaggerJSDoc.Options = {
 };
 
 const swaggerSpec = swaggerJSDoc(options);
+
+const swaggerUIOptions: SwaggerUiOptions = {
+  customCss: `
+    .topbar-wrapper .link {
+      content: url('');
+      heigh: 80px;
+      width: auto;
+    }
+    .swagger-ui .topbar {
+      background-color: ;
+    }
+  `,
+  customSiteTitle: 'Documentation REST API Product Management',
+};
+
 export default swaggerSpec;
+export { swaggerUIOptions };
