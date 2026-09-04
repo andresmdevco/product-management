@@ -101,10 +101,10 @@ router.get('/:id',
  *                        properties:
  *                            name:
  *                                type: string
- *                                example: "Monitor Curvo 54 Pulgadas"
+ *                                example: "Mouse Inalámbrico 20K DPI"
  *                            price:
  *                                type: number
- *                                example: 499   
+ *                                example: 250   
  *        responses:
  *            201:
  *                description: Succesfull response
@@ -186,6 +186,34 @@ router.put('/:id',
   updateProduct
 );
 
+/**
+ * @swagger
+ * /api/products/{id}:
+ *    patch:
+ *        summary: Update product availability
+ *        tags:
+ *            - Products
+ *        description: Returns the updated availability
+ *        parameters:
+ *          - in: path
+ *            name: id
+ *            description: The ID of the product to retrieve
+ *            required: true
+ *            schema:
+ *                type: integer
+ *        responses:
+ *            200:
+ *                description: Succesfull response
+ *                content: 
+ *                    application/json:
+ *                        schema: 
+ *                            $ref: '#/components/schemas/Product'
+ *            400:
+ *                description: Bad Reques - Invalida ID
+ *            404:
+ *                description: Product Not Found       
+ * 
+ */
 router.patch('/:id', 
   param('id').isInt().withMessage('ID no válido'),
   handleInputErrors,
