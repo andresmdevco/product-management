@@ -18,7 +18,7 @@ const router = Router();
  *              name:
  *                  type: string
  *                  description: The Product name
- *                  example: Mouse Inalambrico 20K DPI
+ *                  example: Mouse Inalámbrico 20K DPI
  *              price:
  *                  type: number
  *                  description: The Product price
@@ -49,7 +49,6 @@ const router = Router();
  *
  */
 router.get('/', getProducts);
-
 
 /**
  * @swagger
@@ -85,6 +84,34 @@ router.get('/:id',
   getProductById
 );
 
+/**
+ * @swagger
+ * /api/products:
+ *    post:
+ *        summary: Creates a new product
+ *        tags:
+ *            - Products
+ *        decription: Returns a new record in the database
+ *        requestBody: 
+ *            required: true
+ *            content:
+ *                application/json:
+ *                    schema:
+ *                        type: object
+ *                        properties:
+ *                            name:
+ *                                type: string
+ *                                example: "Monitor Curvo 54 Pulgadas"
+ *                            price:
+ *                                type: number
+ *                                example: 499   
+ *        responses:
+ *            201:
+ *                description: Product created successfully
+ *            400:
+ *                description: Bad Request - invalid input data
+ * 
+ */
 router.post('/', 
   // Validación
   body('name')
