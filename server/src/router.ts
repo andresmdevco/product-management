@@ -1,6 +1,13 @@
 import { Router } from 'express';
 import { body, param } from 'express-validator';
-import { createProduct, deleteProduct, getProductById, getProducts, updateAvailability, updateProduct } from './handlers/product';
+import {
+  createProduct,
+  deleteProduct,
+  getProductById,
+  getProducts,
+  updateAvailability,
+  updateProduct,
+} from './handlers/product';
 import { handleInputErrors } from './middleware';
 
 const router = Router();
@@ -10,7 +17,7 @@ const router = Router();
  *    schemas:
  *      Product:
  *          type: object
- *          properties: 
+ *          properties:
  *              id:
  *                  type: integer
  *                  description: The Product ID
@@ -32,12 +39,12 @@ const router = Router();
 /**
  * @swagger
  * /api/products:
- *    get: 
+ *    get:
  *        summary: Get a list of products
- *        tags: 
+ *        tags:
  *            - Products
  *        description: Return a list of products
- *        responses: 
+ *        responses:
  *            200:
  *                description: Succesfull response
  *                content:
@@ -76,12 +83,13 @@ router.get('/', getProducts);
  *                description: Not found
  *            400:
  *                description: Bad Request - Invalid ID
- * 
+ *
  */
-router.get('/:id', 
+router.get(
+  '/:id',
   param('id').isInt().withMessage('ID no válido'),
   handleInputErrors,
-  getProductById
+  getProductById,
 );
 
 /**
@@ -92,7 +100,7 @@ router.get('/:id',
  *        tags:
  *            - Products
  *        decription: Returns a new record in the database
- *        requestBody: 
+ *        requestBody:
  *            required: true
  *            content:
  *                application/json:
@@ -104,36 +112,39 @@ router.get('/:id',
  *                                example: "Mouse Inalámbrico 20K DPI"
  *                            price:
  *                                type: number
- *                                example: 250   
+ *                                example: 250
  *        responses:
  *            201:
  *                description: Succesfull response
- *                content: 
+ *                content:
  *                    application/json:
- *                        schema: 
+ *                        schema:
  *                            $ref: '#/components/schemas/Product'
  *            400:
- *                description: Bad Request - invalid input data
- * 
+ *                description: Bad Request - Invalid input data
+ *
  */
-router.post('/', 
+router.post(
+  '/',
   // Validación
-  body('name')
-    .notEmpty().withMessage('El nombre del Producto no puede ir vacío'),
+  body('name').notEmpty().withMessage('El nombre del Producto no puede ir vacío'),
   body('price')
-    .isNumeric().withMessage('Valor no válido')
-    .notEmpty().withMessage('El precio del Producto no puede ir vacío')
-    .custom(value => value > 0).withMessage('Precio no válido'),
+    .isNumeric()
+    .withMessage('Valor no válido')
+    .notEmpty()
+    .withMessage('El precio del Producto no puede ir vacío')
+    .custom((value) => value > 0)
+    .withMessage('Precio no válido'),
   handleInputErrors,
-  createProduct
+  createProduct,
 );
 
 /**
  * @swagger
  * /api/products/{id}:
- *    put: 
+ *    put:
  *        summary: Updates a product with user input
- *        tags: 
+ *        tags:
  *            - Products
  *        description: Returns the updated product
  *        parameters:
@@ -143,7 +154,7 @@ router.post('/',
  *            required: true
  *            schema:
  *                type: integer
- *        requestBody: 
+ *        requestBody:
  *            required: true
  *            content:
  *                application/json:
@@ -155,35 +166,37 @@ router.post('/',
  *                                example: "Mouse Inalámbrico 20K DPI"
  *                            price:
  *                                type: number
- *                                example: 250   
+ *                                example: 250
  *                            availability:
- *                                type: boolean 
+ *                                type: boolean
  *                                example: true
  *        responses:
  *            200:
  *                description: Succesfull response
- *                content: 
+ *                content:
  *                    application/json:
- *                        schema: 
+ *                        schema:
  *                            $ref: '#/components/schemas/Product'
  *            400:
- *                description: Bad Reques - Invalida ID or Invalid input data
+ *                description: Bad Reques - Invalid ID or Invalid input data
  *            404:
  *                description: Product Not Found
- * 
+ *
  */
-router.put('/:id', 
+router.put(
+  '/:id',
   param('id').isInt().withMessage('ID no válido'),
-  body('name')
-    .notEmpty().withMessage('El nombre del Producto no puede ir vacío'),
+  body('name').notEmpty().withMessage('El nombre del Producto no puede ir vacío'),
   body('price')
-    .isNumeric().withMessage('Valor no válido')
-    .notEmpty().withMessage('El precio del Producto no puede ir vacío')
-    .custom(value => value > 0).withMessage('Precio no válido'),
-  body('availability')
-    .isBoolean().withMessage('Valor para disponibilidad no válido'),
+    .isNumeric()
+    .withMessage('Valor no válido')
+    .notEmpty()
+    .withMessage('El precio del Producto no puede ir vacío')
+    .custom((value) => value > 0)
+    .withMessage('Precio no válido'),
+  body('availability').isBoolean().withMessage('Valor para disponibilidad no válido'),
   handleInputErrors,
-  updateProduct
+  updateProduct,
 );
 
 /**
@@ -204,26 +217,56 @@ router.put('/:id',
  *        responses:
  *            200:
  *                description: Succesfull response
- *                content: 
+ *                content:
  *                    application/json:
- *                        schema: 
+ *                        schema:
  *                            $ref: '#/components/schemas/Product'
  *            400:
- *                description: Bad Reques - Invalida ID
+ *                description: Bad Request - Invalid ID
  *            404:
- *                description: Product Not Found       
- * 
+ *                description: Product Not Found
+ *
  */
-router.patch('/:id', 
+router.patch(
+  '/:id',
   param('id').isInt().withMessage('ID no válido'),
   handleInputErrors,
-  updateAvailability
+  updateAvailability,
 );
 
-router.delete('/:id', 
+/**
+ * @swagger
+ * /api/products/{id}:
+ *    delete:
+ *        summary: Deletes a product by a given ID
+ *        tags:
+ *            - Products
+ *        description: Returns a confirmation message
+ *        parameters:
+ *          - in: path
+ *            name: id
+ *            description: The ID of the product to delete
+ *            required: true
+ *            schema:
+ *                type: integer
+ *        responses:
+ *            200:
+ *                description: Succesfull response
+ *                content:
+ *                    application/json:
+ *                        schema:
+ *                            type: string
+ *                            value: 'Producto Eliminado'
+ *            400:
+ *                description: Bad Request - Invalid ID
+ *            404:
+ *                description: Product Not Found
+ */
+router.delete(
+  '/:id',
   param('id').isInt().withMessage('ID no válido'),
   handleInputErrors,
-  deleteProduct
+  deleteProduct,
 );
 
 export default router;
