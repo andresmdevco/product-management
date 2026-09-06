@@ -24,12 +24,12 @@ const swaggerSpec = swaggerJSDoc(options);
 const swaggerUIOptions: SwaggerUiOptions = {
   customCss: `
     .topbar-wrapper .link {
-      content: url('');
+      content: url('/public/product-management-logo.png');
       heigh: 80px;
-      width: auto;
+      width: 50px;
     }
     .swagger-ui .topbar {
-      background-color: ;
+      background-color: #1a2635;
     }
   `,
   customSiteTitle: 'Documentation REST API Product Management',

@@ -1,3 +1,4 @@
+import path from 'path';
 import express from 'express';
 import colors from 'colors';
 import swaggerUI from 'swagger-ui-express';
@@ -24,6 +25,9 @@ const server = express();
 
 // Leer datos de formularios
 server.use(express.json());
+
+// Archivos estáticos (para el logo de Swagger, por ejemplo)
+server.use('/public', express.static(path.join(__dirname, '../public')));
 
 server.use('/api/products', router);
 
