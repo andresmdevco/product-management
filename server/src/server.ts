@@ -2,6 +2,7 @@ import path from 'path';
 import express from 'express';
 import colors from 'colors';
 import cors, { CorsOptions } from 'cors';
+import morgan from 'morgan';
 import swaggerUI from 'swagger-ui-express';
 import swaggerSpec, { swaggerUIOptions } from './config/swagger';
 import router from './router';
@@ -38,6 +39,8 @@ server.use(cors(corsOptions));
 
 // Leer datos de formularios
 server.use(express.json());
+
+server.use(morgan('dev'));
 
 // Archivos estáticos (para el logo de Swagger, por ejemplo)
 server.use('/public', express.static(path.join(__dirname, '../public')));
