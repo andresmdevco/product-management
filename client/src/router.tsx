@@ -12,6 +12,7 @@ export const router = createBrowserRouter([
   {
     path: '/',
     element: <Layout />,
+    HydrateFallback: () => <p className="text-center p-10">Cargando...</p>,
     children: [
       {
         index: true,
