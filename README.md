@@ -1,6 +1,6 @@
 # 📦 Administrador de Productos
  
-Aplicación full stack para la administración de productos: registro, edición, eliminación y control de disponibilidad. El frontend está construido con **React**, **TypeScript** y **Tailwind CSS**, y el backend es una **REST API** con **Node.js**, **Express** y **TypeScript**, usando **PostgreSQL** como base de datos a través de **Sequelize**. El frontend está desplegado en **Vercel** y el backend junto con la base de datos en **Render**.
+Aplicación Full Stack(PERN) para la administración de productos: registro, edición, eliminación y control de disponibilidad. El frontend está construido con **React**, **TypeScript** y **Tailwind CSS**, y el backend es una **REST API** con **Node.js**, **Express** y **TypeScript**, usando **PostgreSQL** como base de datos a través de **Sequelize**. El frontend está desplegado en **Vercel** y el backend junto con la base de datos en **Render**.
  
 ## 🌐 Demo
  
