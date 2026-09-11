@@ -1,6 +1,6 @@
 import path from 'path';
 import express from 'express';
-import colors from 'colors';
+// import colors from 'colors';
 import cors, { CorsOptions } from 'cors';
 import morgan from 'morgan';
 import swaggerUI from 'swagger-ui-express';
@@ -16,7 +16,8 @@ export async function connectDB() {
     // console.log(colors.blue('Conexión exitosa a la BD'));
   } catch (error) {
     // console.log(error);
-    console.log(colors.red.bold('Hubo un error al conectar a la BD'));
+    // console.log(colors.red.bold('Hubo un error al conectar a la BD'));
+    console.log('Hubo un error al conectar a la BD');
   }
 }
 
